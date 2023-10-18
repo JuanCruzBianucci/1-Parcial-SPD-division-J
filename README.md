@@ -150,16 +150,25 @@ Los valores de lectura son aquellos que se obtenien de imprimir los valores del 
 Una vez definido esto agregaremos una nueva condicional al del sensor de temperatura para que el motor se encienda SOLO SI la temperatura es mayor o igual a 30° Y el valor del sensor de luz ambiental tiene un valor de igual o mayor de 50:
 
 int valorsensor_tmp = analogRead(SENSOR_TMP);
+
 int temp = map (valorsensor_tmp, 20, 358, -40, 125);
+
 if (temp >= 30 && luz >=50)
+
 {
+
 digitalWrite (13, 1);
+
 }
+
 else
+
 {
+
 digitalWrite (13, 0);
+
 }
 
 
-
+![Esquema de funcionamiento de motor con sensores](img_7.jpg)
 
