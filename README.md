@@ -8,7 +8,7 @@ La primera parte del proyecyto consistira en conectar dos display de 7 segmentos
 
 Primero, el esquema de las conexiones de nuestro proyecto:
 
-![](img_1.jpg)
+![Circuito conectado](img_1.jpg)
 
 _Los leds de cada display se conectan a las entradas digitales del Arduino (5 a 11 inclusive). Los catodos comunes a entradas analogicas (A4 para la unidad y A5 para la decena). Y los botones a entradas digitales (2 para el restador, 3 para el sumador y 4 para el reset) y a tierra._
 
@@ -43,7 +43,7 @@ Se utiliza para poder definir como salida a todos los pines digitales de los led
 Esta funcion se usa para definir que leds en el display se encienden, realizando un digitalWrite para cada led dentro de la funcion. Tomara 1 o 0 7 veces como parametros para definifinir que leds desea que se encienda o no para formar el digito buscado.
 
 * dibujarNumero:
-La funcion dibujar numero se encarga de definir las 10 combinaciones posibles entre los leds para formar el numero en el display. Toma como parametros el valor de 1 o 0 para cada led, el numero que desea dibujar y el valor del visualizador (para saber si lo muestra como unidad o decena).
+La funcion dibujar numero se encarga de definir las 10 combinaciones posibles entre los leds para formar el numero en el display. Toma como parametros el valor de 1 o 0 para cada led y el numero que desea dibujar.
 Se realiza un switch tomando como variable el parametro numero y luego se define en cada caso posible (del 0 al 9) la combinacion de leds a encender y apagar con la funcion configurarDisplay ya explicada.
 En cada caso debe hacerse un _break_ para que el numero se mantenga dibujado.
 
@@ -67,6 +67,7 @@ De esta manera, se logra que el toque del boton sea preciso y no de multiples le
 El loop del codigo consistira entonces de la aplicacion de la funcion keypressed (a la cual se denominara "pressed"). Si la misma es "SUBE" se suma el contador (countDigit) en uno. Si es "BAJA" se resta en uno y si es RESET lo vuelve 0. Se crean las condicionales para asegurarse que el rango se mantenga entre 00 y 99 y luego se aplica el valor del contador como parametro a la funcion printCount que mostrara el resultado.
 
 
+![Ej de circuito en funcionamiento](img_2.jpg)
 
 
 
