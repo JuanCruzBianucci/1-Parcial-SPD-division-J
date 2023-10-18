@@ -129,8 +129,32 @@ Tomaremos el circuito anterior y agregaremos el nuevo sensor, conectando el emis
 
 ![Circuito parte 3](img_6.jpg)
 
+# **Codigo 3**
 
+Primero definiremos el sensor nuevo y modificaremos el nombre del sensor anterior para una definicion mas precisa de componente:
 
+#define SENSOR_LUZ A2
+#define SENSOR_TMP A3
+
+Ahora realizaremos la definicion de las variables del sensor y el mapeado de las mismas como en la parte anterior:
+
+int valorsensor_luz = analogRead(SENSOR_LUZ);
+int luz = map (valorsensor_luz, 1023, 976, 0, 100);
+
+Los valores de lectura son aquellos que se obtenien de imprimir los valores del sensor en monitor a la hora de probar el componente. Los valores de luz se representaran de 0 a 100 en este caso.
+
+Una vez definido esto agregaremos una nueva condicional al del sensor de temperatura para que el motor se encienda SOLO SI la temperatura es mayor o igual a 30° Y el valor del sensor de luz ambiental tiene un valor de igual o mayor de 50:
+
+int valorsensor_tmp = analogRead(SENSOR_TMP);
+int temp = map (valorsensor_tmp, 20, 358, -40, 125);
+if (temp >= 30 && luz >=50)
+{
+digitalWrite (13, 1);
+}
+else
+{
+digitalWrite (13, 0);
+}
 
 
 
