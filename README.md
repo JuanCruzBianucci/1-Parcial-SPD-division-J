@@ -106,6 +106,11 @@ El primer valor en la funcion map es el valor que se lee o mide, en este caso se
 
 Una vez realizado esto creamos un condicional para que, si la temepratura es igual o mayor a 30 grados (if (temp >= 30)) entonces el motor comenzara a girar (digitalWrite (13, 1);). Es importante crear un else de forma tal que el motor no gire en caso contrario (else -> digitalWrite (13, 0);).
 
+![Ej sensor y motor apagado](img_4.jpg)
+
+![Ej sensor y motor encendido](img_5.jpg)
+
+
 Resta ahora utilizar el switch. Se creara una condicional en cuyo caso su valor sea 1 o 0. De ser uno el programa actuara igual y el contador sumara/restara de 1 a 1.
 
 Pero si el mismo estuviera en cero empezara a tomar numeros primos. Para esto procedemos de la siguiente forma:
@@ -116,9 +121,15 @@ A continuacion realizamos un for que iterara (empezando a partir del dos hasta e
 
 Asi, solo mostrara aquellos numeros que son divisibles por si mismos, es decir, primos.
 
-![Ej sensor y motor apagado](img_4.jpg)
+## _3° Parte: Modificación según el Último Número de Documento:_
 
-![Ej sensor y motor encendido](img_5.jpg)
+La ultima parte del proyecto consistira en implementar un nuevo componente segun el numero de documento del autor. En este caso se incorpara un _sensor de luz ambiental_.
+
+Tomaremos el circuito anterior y agregaremos el nuevo sensor, conectando el emisor a tierra y el colector a un pin analogico (A2) y a una resistencia de 220 ohms que ira a 5v.
+
+![Circuito parte 3](img_6.jpg)
+
+
 
 
 
