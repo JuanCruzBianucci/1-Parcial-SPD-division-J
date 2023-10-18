@@ -94,8 +94,11 @@ El sensor se conecta a potencia y tierra y el "vout" al pin analogico numero 3.
 Ahora se debera actualizar el codigo anterior. Se agregan las definiciones del motor, el sensor y el switch:
 
 #define MOTOR 13
+
 #define SENSOR A3
+
 ...
+
 #define SW_1 12
 
 En _setup_, definimos al motor como un output (pinMode(MOTOR, OUTPUT);)
@@ -134,12 +137,13 @@ Tomaremos el circuito anterior y agregaremos el nuevo sensor, conectando el emis
 Primero definiremos el sensor nuevo y modificaremos el nombre del sensor anterior para una definicion mas precisa de componente:
 
 #define SENSOR_LUZ A2
+
 #define SENSOR_TMP A3
 
 Ahora realizaremos la definicion de las variables del sensor y el mapeado de las mismas como en la parte anterior:
 
 int valorsensor_luz = analogRead(SENSOR_LUZ);
-int luz = map (valorsensor_luz, 1023, 976, 0, 100);
+int luz = map (valorsensor_luz, 1023, 919, 0, 100);
 
 Los valores de lectura son aquellos que se obtenien de imprimir los valores del sensor en monitor a la hora de probar el componente. Los valores de luz se representaran de 0 a 100 en este caso.
 
