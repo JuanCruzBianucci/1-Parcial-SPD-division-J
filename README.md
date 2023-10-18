@@ -50,7 +50,17 @@ En cada caso debe hacerse un _break_ para que el numero se mantenga dibujado.
 * prendeDigito:
 Esta funcion se encarga de definir que display debera verse y cual apagarse, de forma tal que puedan, en conjunto con las demas funciones, dibujar dos digitos independientes para la unidad y la decena. La funcion toma como parametro simplemente el visualizador que debe observarse (definido como digito) y lo ejecuta mediante digitalWrite. Si "digito" corresponde al VISUALIZADOR_1, este se apagara y se encendera el VISUALIZADOR_2. Si fuera lo opuesto, se encendera el 1 y apagara el 2. Caso contrario ambos estaran encendidos.
 
-printCount
+* printCount:
+La funcion printCount combinara las funciones anteriormente definidas y tomara como parametro solamente "count", que se correspondera con el numero que desea mostrarse.
+Se usa la funcion prendeDigito y se da como parametro "APAGADOS", para que ambos display comienzen apagados. Luego se da un delay de 10 milisegundos (el valor definido de TIMEDISPLAYON). A continuacion se invoca a la funcion dibujarNumero dandole como parametros cada led y el valor usado para la decena ("count" dividido 10).
+Despues se llama a la funcion prendeDigito, dandole como parametro el visualizador de la decena. Se repite el delay anterior y se vuelven a apagar ambos displays.
+A continuación se volvera a llamar a la funcion dibujarNumero, esta vez dando como parametro del numero  _count - 10 * (int)count / 10_, que representara a la unidad.
+Se usa el prendedigito nuevamente, esta vez dando como parametro el visualizador correspondiente a la unidad y se agrega el mismo delay.
+De esta manera se lograra la multiplexacion en ambos digitos al alternarse ambos por solo 10 milisegundos al repetirse constantemente el "loop"
+
+* keypresed:
+Esta es la funcion encargada de determinar que boton se oprime y devolver aproiadamente el estado del mismo.
+se define como sube, baja y reset al digitalWrite de cada boton respectivamente. Lo primero sera definir las "previas". Si un boton se oprime (digitalWrite = 1) entonces la previa de ese boton tmb se volvera 1 (ej. if(sube == 1) -> subePrevia = 1). Luego se crea un condicional para cada boton, en donde se comprobara si el "valor" del boton es 0 y si es diferente al de su previa. De serlo, la previa tomara el valor del actual (0)
 
 
 
