@@ -58,9 +58,14 @@ A continuación se volvera a llamar a la funcion dibujarNumero, esta vez dando c
 Se usa el prendedigito nuevamente, esta vez dando como parametro el visualizador correspondiente a la unidad y se agrega el mismo delay.
 De esta manera se lograra la multiplexacion en ambos digitos al alternarse ambos por solo 10 milisegundos al repetirse constantemente el "loop"
 
-* keypresed:
+* keypressed:
 Esta es la funcion encargada de determinar que boton se oprime y devolver aproiadamente el estado del mismo.
-se define como sube, baja y reset al digitalWrite de cada boton respectivamente. Lo primero sera definir las "previas". Si un boton se oprime (digitalWrite = 1) entonces la previa de ese boton tmb se volvera 1 (ej. if(sube == 1) -> subePrevia = 1). Luego se crea un condicional para cada boton, en donde se comprobara si el "valor" del boton es 0 y si es diferente al de su previa. De serlo, la previa tomara el valor del actual (0)
+se define como sube, baja y reset al digitalWrite de cada boton respectivamente. Lo primero sera definir las "previas". Si un boton se oprime (digitalWrite = 1) entonces la previa de ese boton tmb se volvera 1 (ej. if(sube == 1) -> subePrevia = 1). Luego se crea un condicional para cada boton, en donde se comprobara si el "valor" del boton es 0 y si es diferente al de su previa. De serlo, la previa tomara el valor del actual (0) y devolvera el valor del boton.
+De esta manera, se logra que el toque del boton sea preciso y no de multiples lecturas al presionarlo por "demasiado" tiempo.
+
+
+El loop del codigo consistira entonces de la aplicacion de la funcion keypressed (a la cual se denominara "pressed"). Si la misma es "SUBE" se suma el contador (countDigit) en uno. Si es "BAJA" se resta en uno y si es RESET lo vuelve 0. Se crean las condicionales para asegurarse que el rango se mantenga entre 00 y 99 y luego se aplica el valor del contador como parametro a la funcion printCount que mostrara el resultado.
+
 
 
 
