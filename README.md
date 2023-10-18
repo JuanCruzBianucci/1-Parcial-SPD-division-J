@@ -12,7 +12,7 @@ Primero, el esquema de las conexiones de nuestro proyecto:
 
 _Los leds de cada display se conectan a las entradas digitales del Arduino (5 a 11 inclusive). Los catodos comunes a entradas analogicas (A4 para la unidad y A5 para la decena). Y los botones a entradas digitales (2 para el restador, 3 para el sumador y 4 para el reset) y a tierra._
 
-# **Codigo:**
+# **Codigo 1**
 
 Primero se definiran los componentes. Los leds de los displays, el valor APAGADOS (que se utiliza para apagar todos los leds), los 3 botones, las entradas analogicas de cada display (visualizador 1 y 2) y el tiempo de display entre los displays (TIMEDISPLAYON).
 
@@ -69,6 +69,58 @@ El loop del codigo consistira entonces de la aplicacion de la funcion keypressed
 
 
 ![Ej de circuito en funcionamiento](img_2.jpg)
+
+## _2° Parte: Modificación con Interruptor Deslizante y Números Primos + motor y sensor:_
+
+La siguiente parte consistira en tomar lo realizado en la primera parte y agregar un switch que hara que el contador funcione como en la primera parte o bien que muestre solo los numeros primos.
+
+Tambien debera agregarle un motor a eleccion (de CC o aficionado) y un tipo de sensor (temepratura, fuerza o flexion) para incorporar al proyecto.
+
+Primero realizamos el esquema del nuevo proyecto. En este caso se utilizo el motor de aficionado y un sensor de tempertatura para incorporar.
+
+![Circuito parte 2](img_3.jpg)
+
+Los nuevos componentes se conectan de la siguiente manera:
+
+El switch conectara su terminal 1 y 2 a alimentacion (5V) y a tierra respectivamente. El común se conectara al pin digital numero 12.
+
+El motor se conecta al pin digital numero 13 y a tierra.
+
+El sensor se conecta a potencia y tierra y el "vout" al pin analogico numero 3.
+
+
+# **Codigo 2**
+
+Ahora se debera actualizar el codigo anterior. Se agregan las definiciones del motor, el sensor y el switch:
+
+#define MOTOR 13
+#define SENSOR A3
+...
+#define SW_1 12
+
+En _setup_, definimos al motor como un output (pinMode(MOTOR, OUTPUT);)
+
+Las nuevas adiciones al codigo se realizaran todas en el Loop. Primero, definimos el valor de lectura del sensor (int valorsensor = analogRead(SENSOR);). Creamos la variable entera "temp" (int temp;) y luego realizaremos el mapeado en la misma con los parametros del sensor (temp = map (valorsensor, 20, 358, -40, 125);).
+
+El primer valor en la funcion map es el valor que se lee o mide, en este caso sera la lectura analogica del sensor ya definida. Los siguientes valores son el minimo y maximo de lectura (los cuales dependen del componente), y el minimo y maximo de temperatura que dicho componente lee. Con esta funcion se igualaran y escalaran los minimos y maximos.
+
+Una vez realizado esto creamos un condicional para que, si la temepratura es igual o mayor a 30 grados (if (temp >= 30)) entonces el motor comenzara a girar (digitalWrite (13, 1);). Es importante crear un else de forma tal que el motor no gire en caso contrario (else -> digitalWrite (13, 0);).
+
+Resta ahora utilizar el switch. Se creara una condicional en cuyo caso su valor sea 1 o 0. De ser uno el programa actuara igual y el contador sumara/restara de 1 a 1.
+
+Pero si el mismo estuviera en cero empezara a tomar numeros primos. Para esto procedemos de la siguiente forma:
+
+Dentro del condicional de SUBE o BAJA, agregamos un nuevo condicional que indicara que, si el numero es 1, se sume o reste un nuevo digito segun corresponda. Ya que el numero uno no es primo y no debe mostrarse.
+
+A continuacion realizamos un for que iterara (empezando a partir del dos hasta el valor del numero menos 1) y en cada iteracion debera realizar la opracion _modulo_ entre el numero y el valor del indice. Si el mismo fuera cero (es decir, no hubiera resto en la operacion) tendra que sumar/restar nuevamente y repetir el proceso.
+
+Asi, solo mostrara aquellos numeros que son divisibles por si mismos, es decir, primos.
+
+![Ej sensor y motor apagado](img_4.jpg)
+
+![Ej sensor y motor encendido](img_5.jpg)
+
+
 
 
 
